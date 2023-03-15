@@ -96,13 +96,13 @@ public class ZCycleView: UIView {
     /// 刷新数据
     public func reloadItemsCount(_ count: Int) {
         cancelTimer()
-        if isAutomatic { startTimer() }
         realItemsCount = count
         placeholder.isHidden = realItemsCount != 0
         setItemsCount()
         dealFirstPage()
         pageControl.numberOfPages = realItemsCount
         pageControl.currentPage = getCurrentIndex() % realItemsCount
+        if isAutomatic { startTimer() }
     }
     
     /// 滚动到下一页
