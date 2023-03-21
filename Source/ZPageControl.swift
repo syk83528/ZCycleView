@@ -46,7 +46,15 @@ public class ZPageControl: UIControl {
     public var currentPageIndicatorTintColor = UIColor.white
     /// 圆点颜色
     public var pageIndicatorTintColor = UIColor.gray
+    
+    /*
+     新增改动  3个参数
+     */
+    public var currentPageIndicatorImg:UIImage? = nil
+    public var pageIndicatorImg:UIImage? = nil
+    public var showImg:Bool = false
 
+    
     private var items = [UIImageView]()
 
     override public func layoutSubviews() {
@@ -54,15 +62,25 @@ public class ZPageControl: UIControl {
         for (index, item) in items.enumerated() {
             let itemFrame = getFrame(index: index)
             item.frame = itemFrame
-            if index == currentPage {
-                item.backgroundColor = currentPageIndicatorTintColor
-                var cornerRadius = currentDotRadius == nil ? itemFrame.size.height/2 : currentDotRadius!
-                item.layer.cornerRadius = cornerRadius
-            } else {
-                item.backgroundColor = pageIndicatorTintColor
-                var cornerRadius = dotRadius == nil ? itemFrame.size.height/2 : dotRadius!
-                item.layer.cornerRadius = cornerRadius
+            //新增改动
+            if self.showImg{
+                if index == currentPage {
+                    item.image = self.currentPageIndicatorImg
+                }else{
+                    item.image = self.pageIndicatorImg
+                }
+            }else{
+                if index == currentPage {
+                    item.backgroundColor = currentPageIndicatorTintColor
+                    var cornerRadius = currentDotRadius == nil ? itemFrame.size.height/2 : currentDotRadius!
+                    item.layer.cornerRadius = cornerRadius
+                } else {
+                    item.backgroundColor = pageIndicatorTintColor
+                    var cornerRadius = dotRadius == nil ? itemFrame.size.height/2 : dotRadius!
+                    item.layer.cornerRadius = cornerRadius
+                }
             }
+           
         }
     }
 
