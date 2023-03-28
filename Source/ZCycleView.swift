@@ -136,6 +136,8 @@ public class ZCycleView: UIView {
         collectionView.dataSource = self
         collectionView.scrollsToTop = false
         collectionView.decelerationRate = UIScrollView.DecelerationRate(rawValue: 0.0)
+        // FIXME: 阿拉伯语言环境下崩溃
+        collectionView.semanticContentAttribute = .forceLeftToRight
         return collectionView
     }()
     
